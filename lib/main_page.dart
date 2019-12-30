@@ -5,7 +5,6 @@ import 'package:ns_tracker/setting_button.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
-import 'ranks_commands_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
