@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ns_tracker/reusable_card.dart';
 import 'constants.dart';
+import 'ippt_brain1.dart';
 
 class IPPT extends StatelessWidget {
   @override
@@ -21,9 +22,9 @@ class _IPPTState extends StatefulWidget {
 }
 
 class __IPPTStateState extends State<_IPPTState> {
-  int pushups = 0;
-  int situps = 0;
-  int run = 1110;
+  int pushups = 30;
+  int situps = 30;
+  int run = 1100;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class __IPPTStateState extends State<_IPPTState> {
                 ),
                 Slider(
                   value: pushups.toDouble(),
-                  min: 0,
+                  min: 1,
                   max: 60,
                   onChanged: (double newValue) {
                     setState(() {
@@ -76,7 +77,7 @@ class __IPPTStateState extends State<_IPPTState> {
                 ),
                 Slider(
                   value: situps.toDouble(),
-                  min: 0,
+                  min: 1,
                   max: 60,
                   onChanged: (double newValue) {
                     setState(() {
@@ -105,11 +106,13 @@ class __IPPTStateState extends State<_IPPTState> {
                 ),
                 Slider(
                   value: run.toDouble(),
+                  divisions: 59,
                   min: 510,
-                  max: 1110,
+                  max: 1100,
                   onChanged: (double newValue) {
                     setState(() {
                       run = newValue.round();
+                      print(run);
                     });
                   },
                 ),
@@ -125,7 +128,11 @@ class __IPPTStateState extends State<_IPPTState> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'RESULTS',
+                  'SCORE',
+                  style: kLabelTextStyle,
+                ),
+                Text(
+                  calculateScore(pushups, situps, run).toString(),
                   style: kLabelTextStyle,
                 ),
               ],
@@ -135,6 +142,17 @@ class __IPPTStateState extends State<_IPPTState> {
       ],
     );
   }
+}
+
+int calculateScore(int pushups, int situps, int runs) {
+  IPPTBrain calculate = IPPTBrain(
+    pushup: pushups,
+    situp: situps,
+    run: runs,
+    age: 22,
+    gender: 0,
+  );
+  return calculate.getOverallScore();
 }
 
 String leadZero(int time) {
