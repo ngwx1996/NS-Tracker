@@ -187,14 +187,7 @@ class _MainPageState extends State<MainPage> {
                 Expanded(
                   child: ReusableCard(
                     onPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return RanksCommands();
-                          },
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/rankcmd');
                     },
                     clickColor: kInactiveCardColor,
                     cardChild: IconContent(
