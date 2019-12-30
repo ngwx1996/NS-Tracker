@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ns_tracker/reusable_card.dart';
 import 'constants.dart';
-import 'ippt_brain.dart';
+import 'ippt_brain1.dart';
 
 class IPPT extends StatelessWidget {
   @override
@@ -48,7 +48,7 @@ class __IPPTStateState extends State<_IPPTState> {
                 ),
                 Slider(
                   value: pushups.toDouble(),
-                  min: 0,
+                  min: 1,
                   max: 60,
                   onChanged: (double newValue) {
                     setState(() {
@@ -77,7 +77,7 @@ class __IPPTStateState extends State<_IPPTState> {
                 ),
                 Slider(
                   value: situps.toDouble(),
-                  min: 0,
+                  min: 1,
                   max: 60,
                   onChanged: (double newValue) {
                     setState(() {
@@ -106,11 +106,13 @@ class __IPPTStateState extends State<_IPPTState> {
                 ),
                 Slider(
                   value: run.toDouble(),
+                  divisions: 59,
                   min: 510,
                   max: 1100,
                   onChanged: (double newValue) {
                     setState(() {
                       run = newValue.round();
+                      print(run);
                     });
                   },
                 ),
@@ -150,11 +152,7 @@ int calculateScore(int pushups, int situps, int runs) {
     age: 22,
     gender: 0,
   );
-  return ((calculate.staticPoints(pushups)).isNegative ||
-          (calculate.staticPoints(situps)).isNegative)
-      ? 0
-      : (calculate.staticPoints(pushups) + calculate.staticPoints(situps)) +
-          calculate.runningPoints();
+  return calculate.getOverallScore();
 }
 
 String leadZero(int time) {
