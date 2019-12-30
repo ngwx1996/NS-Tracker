@@ -20,5 +20,5 @@ This app aims to supplements those in service with the tools listed below.
 //TO BE COMPLETED
 
 ## Created and Maintained by
-Wei Xuan (Nathan) Ng
+Wei Xuan (Nathan) Ng\
 Sean Gerard Ang Wong
