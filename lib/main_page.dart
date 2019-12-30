@@ -5,6 +5,7 @@ import 'package:ns_tracker/setting_button.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
+import 'ranks_commands_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -182,11 +183,20 @@ class _MainPageState extends State<MainPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return RanksCommands();
+                          },
+                        ),
+                      );
+                    },
                     clickColor: kInactiveCardColor,
                     cardChild: IconContent(
                       icon: MaterialCommunityIcons.face_profile,
-                      label: 'Common Commands',
+                      label: 'Ranks / Commands',
                     ),
                   ),
                 ),
