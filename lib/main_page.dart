@@ -17,6 +17,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('NS Tracker'),
       ),
       body: Column(
@@ -92,7 +93,9 @@ class _MainPageState extends State<MainPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.pushNamed(context, '/ippt');
+                    },
                     clickColor: kInactiveCardColor,
                     cardChild: IconContent(
                       icon: MaterialCommunityIcons.run_fast,
