@@ -94,3 +94,9 @@ const rankNamesSCDF = [
   'DC',
   'COMR',
 ];
+
+Map<String, List<String>> whichForceName = {
+  'SAF': rankNamesSAF,
+  'SPF': rankNamesSPF,
+  'SCDF': rankNamesSCDF,
+};

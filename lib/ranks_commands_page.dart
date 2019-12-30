@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ns_tracker/reusable_card.dart';
-import 'saf_ranks.dart';
-import 'constants.dart';
+import 'rank_display.dart';
 
 class RanksCommands extends StatefulWidget {
   @override
@@ -73,84 +71,8 @@ class PageOne extends StatelessWidget {
       itemCount: 11,
       itemBuilder: (context, index) => Container(
         padding: EdgeInsets.all(3.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SAF/SAF${(index * 2 + index + 1).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSAF[index * 2 + index],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SAF/SAF${(index * 2 + index + 2).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSAF[index * 2 + index + 1],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SAF/SAF${(index * 2 + index + 3).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSAF[index * 2 + index + 2],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+        child: RankDisplay(
+            whichForce: 'SAF', index: index, insigniaColor: Colors.white54),
       ),
     );
   }
@@ -164,87 +86,13 @@ class PageTwo extends StatelessWidget {
       itemCount: 5,
       itemBuilder: (context, index) => Container(
         padding: EdgeInsets.all(3.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        //color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SPF/SPF${(index * 2 + index + 1).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSPF[index * 2 + index],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        //color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SPF/SPF${(index * 2 + index + 2).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSPF[index * 2 + index + 1],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        //color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SPF/SPF${(index * 2 + index + 3).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSPF[index * 2 + index + 2],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: RankDisplay(
+          whichForce: 'SPF',
+          index: index,
+          insigniaColor: null,
         ),
       ),
     );
-    ;
   }
 }
 
@@ -256,83 +104,10 @@ class PageThree extends StatelessWidget {
       itemCount: 5,
       itemBuilder: (context, index) => Container(
         padding: EdgeInsets.all(3.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        //color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SCDF/SCDF${(index * 2 + index + 1).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSCDF[index * 2 + index],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        //color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SCDF/SCDF${(index * 2 + index + 2).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSCDF[index * 2 + index + 1],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ReusableCard(
-                onPress: () {},
-                clickColor: kInactiveCardColor,
-                cardChild: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image(
-                        height: 100,
-                        //color: Colors.white54,
-                        image: AssetImage(
-                            "assets/SCDF/SCDF${(index * 2 + index + 3).toString()}.png"),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        rankNamesSCDF[index * 2 + index + 2],
-                        style: kLabelTextStyle,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: RankDisplay(
+          whichForce: 'SCDF',
+          index: index,
+          insigniaColor: null,
         ),
       ),
     );

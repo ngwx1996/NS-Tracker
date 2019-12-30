@@ -168,7 +168,9 @@ class _MainPageState extends State<MainPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.pushNamed(context, '/calendar');
+                    },
                     clickColor: kInactiveCardColor,
                     cardChild: IconContent(
                       icon: MaterialCommunityIcons.calendar_month,
