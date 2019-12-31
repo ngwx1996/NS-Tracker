@@ -16,6 +16,11 @@ class IPPTBrain {
     this.gender,
   });
 
+  Map standards = {
+    "1": {"pass": 51, "incentive": 61, "silver": 75, "gold": 85},
+    "2": {"pass": 51, "incentive": 61, "silver": 75, "gold": 90}
+  };
+
   Map pushUpScores = {
     "60": [
       "25",
@@ -2670,7 +2675,6 @@ class IPPTBrain {
       case "22":
       case "23":
       case "24":
-        print('age poriubt');
         return 2;
       case "25":
       case "26":
@@ -2739,6 +2743,18 @@ class IPPTBrain {
       scores = runScores[repsOrTiming.toString()];
     }
     return scores[getGroupWithAge() - 1];
+  }
+
+  String getAward(int totalScore) {
+    if (totalScore >= standards['1']['gold']) {
+      return 'Gold';
+    } else if (totalScore >= standards['1']['silver']) {
+      return 'Silver';
+    } else if (totalScore >= standards['1']['pass']) {
+      return 'Pass';
+    } else {
+      return 'Fail';
+    }
   }
 
   // Get total score

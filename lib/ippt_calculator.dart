@@ -25,7 +25,13 @@ class __IPPTStateState extends State<_IPPTState> {
   int pushups = 30;
   int situps = 30;
   int run = 1100;
-
+  IPPTBrain calculate = IPPTBrain(
+    pushup: 30,
+    situp: 30,
+    run: 1100,
+    age: 22,
+    gender: 0,
+  );
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -125,14 +131,32 @@ class __IPPTStateState extends State<_IPPTState> {
             onPress: () {},
             clickColor: kInactiveCardColor,
             cardChild: Column(
+//              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'SCORE',
+                  'PUSH UP SCORE: ' +
+                      calculateStatic(pushups, situps, run, pushups, 'push-up'),
                   style: kLabelTextStyle,
                 ),
                 Text(
-                  calculateScore(pushups, situps, run).toString(),
+                  'SIT UP SCORE: ' +
+                      calculateStatic(pushups, situps, run, situps, 'sit-up'),
+                  style: kLabelTextStyle,
+                ),
+                Text(
+                  '2.4 KM RUN SCORE: ' +
+                      calculateStatic(pushups, situps, run, run, 'run'),
+                  style: kLabelTextStyle,
+                ),
+                Text(
+                  'TOTAL SCORE: ' +
+                      calculateScore(pushups, situps, run).toString(),
+                  style: kLabelTextStyle,
+                ),
+                Text(
+                  'AWARD: ' +
+                      calculate.getAward(calculateScore(pushups, situps, run)),
                   style: kLabelTextStyle,
                 ),
               ],
@@ -155,6 +179,18 @@ int calculateScore(int pushups, int situps, int runs) {
   return calculate.getOverallScore();
 }
 
+String calculateStatic(int pushups, int situps, int runs, repsOrTiming, type) {
+  IPPTBrain calculate = IPPTBrain(
+    pushup: pushups,
+    situp: situps,
+    run: runs,
+    age: 22,
+    gender: 0,
+  );
+  return calculate.getScore(repsOrTiming, type);
+}
+
+// adds a leading zero for single digit numbers
 String leadZero(int time) {
   String seconds = (time % 60).toString();
   return seconds.padLeft(2, '0');
