@@ -1,16 +1,24 @@
-# ns_tracker
+# NS Tracker
 
-An NS Tracker made using Flutter
+NS Tracker is an app made using Flutter.
+National Service in Singapore is a system of compulsory goverment service over a two year period, either in the army, police, or civil defense.
+This app aims to supplements those in service with the tools listed below.
+
+## Tools
+1. Countdown to ORD / Parades/  Payday / Public Holiday
+2. Track leave and off-in-lieu
+3. IPPT (Individual Physical Proficiency Test) Calculator
+4. Calendar (Public Holiday, optional: Shift Work)
+5. Rank system in all three forces
+6. Common Commands
+7. To-Do List
+
+## Future Improvements
+// TO BE COMPLETED
 
 ## Getting Started
+//TO BE COMPLETED
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Created and Maintained by
+Wei Xuan (Nathan) Ng\
+Sean Gerard Ang Wong

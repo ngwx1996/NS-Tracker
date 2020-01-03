@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'constants.dart';
-
 class IPPTBrain {
   final int pushup;
   final int situp;
@@ -15,6 +12,11 @@ class IPPTBrain {
     this.age,
     this.gender,
   });
+
+  Map standards = {
+    "1": {"pass": 51, "incentive": 61, "silver": 75, "gold": 85},
+    "2": {"pass": 51, "incentive": 61, "silver": 75, "gold": 90}
+  };
 
   Map pushUpScores = {
     "60": [
@@ -2670,7 +2672,6 @@ class IPPTBrain {
       case "22":
       case "23":
       case "24":
-        print('age poriubt');
         return 2;
       case "25":
       case "26":
@@ -2739,6 +2740,39 @@ class IPPTBrain {
       scores = runScores[repsOrTiming.toString()];
     }
     return scores[getGroupWithAge() - 1];
+  }
+
+  int toNextPoint(repsOrTiming, type) {
+    var index = repsOrTiming;
+    var i;
+    var score = getScore(repsOrTiming, type);
+    for (i = repsOrTiming; i >= 0; i++) {
+      if (type == 'push-up' || type == 'sit-up') {
+        if (i >= 60) {
+          break;
+        }
+        if (int.parse(score) < int.parse(getScore(i, type))) {
+          break;
+        }
+      }
+    }
+    if (i == 60) {
+      return 0;
+    } else {
+      return i - index;
+    }
+  }
+
+  String getAward(int totalScore) {
+    if (totalScore >= standards['1']['gold']) {
+      return 'Gold';
+    } else if (totalScore >= standards['1']['silver']) {
+      return 'Silver';
+    } else if (totalScore >= standards['1']['pass']) {
+      return 'Pass';
+    } else {
+      return 'Fail';
+    }
   }
 
   // Get total score
