@@ -18,6 +18,17 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('NS Tracker'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -59,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                       animationDuration: 2000,
                       percent: 0.9,
                       center: Text("90.0%"),
-                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      linearStrokeCap: LinearStrokeCap.butt,
                       progressColor: Colors.greenAccent,
                     ),
                   ),
@@ -211,19 +222,19 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           // Settings Button
-          Container(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(),
-                ),
-                Container(
-                  child: SettingButton(),
-                  width: 100,
-                ),
-              ],
-            ),
-          ),
+//          Container(
+//            child: Row(
+//              children: <Widget>[
+//                Expanded(
+//                  child: Container(),
+//                ),
+//                Container(
+//                  child: SettingButton(),
+//                  width: 100,
+//                ),
+//              ],
+//            ),
+//          ),
         ],
       ),
     );

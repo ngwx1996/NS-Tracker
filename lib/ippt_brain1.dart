@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'constants.dart';
-
 class IPPTBrain {
   final int pushup;
   final int situp;
@@ -2744,6 +2741,27 @@ class IPPTBrain {
     }
     return scores[getGroupWithAge() - 1];
   }
+
+//  int toNextPoint(repsOrTiming, type) {
+//    var index = repsOrTiming;
+//    var i;
+//    var score = getScore(repsOrTiming, type);
+//    for (i = repsOrTiming; i >= 0; i++) {
+//      if (type == 'push-up') {
+//        if (i >= 60) {
+//          break;
+//        }
+//        if (int.parse(score) < int.parse(getScore(i, type))) {
+//          break;
+//        }
+//      }
+//    }
+//    if (i == 60) {
+//      return 0;
+//    } else {
+//      return i - index;
+//    }
+//  }
 
   String getAward(int totalScore) {
     if (totalScore >= standards['1']['gold']) {
