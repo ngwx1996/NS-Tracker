@@ -44,9 +44,9 @@ class __IPPTStateState extends State<_IPPTState> {
             cardChild: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-//                Text(toNextPoint(pushups, situps, run, pushups, 'push-up')
-//                        .toString() +
-//                    ' reps to next point'),
+                Text(toNextPoint(pushups, situps, run, pushups, 'push-up')
+                        .toString() +
+                    ' reps to next point'),
                 Text(
                   pushups.toString(),
                   style: kNumberTextStyle,
@@ -89,9 +89,9 @@ class __IPPTStateState extends State<_IPPTState> {
             cardChild: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-//                Text(toNextPoint(pushups, situps, run, situps, 'sit-up')
-//                        .toString() +
-//                    'reps to next point'),
+                Text(toNextPoint(pushups, situps, run, situps, 'sit-up')
+                        .toString() +
+                    ' reps to next point'),
                 Text(
                   situps.toString(),
                   style: kNumberTextStyle,
@@ -233,16 +233,16 @@ String calculateStatic(int pushups, int situps, int runs, repsOrTiming, type) {
   return calculate.getScore(repsOrTiming, type);
 }
 
-//int toNextPoint(int pushups, int situps, int runs, repsOrTiming, type) {
-//  IPPTBrain calculate = IPPTBrain(
-//    pushup: pushups,
-//    situp: situps,
-//    run: runs,
-//    age: 22,
-//    gender: 0,
-//  );
-//  return calculate.toNextPoint(repsOrTiming, type);
-//}
+int toNextPoint(int pushups, int situps, int runs, repsOrTiming, type) {
+  IPPTBrain calculate = IPPTBrain(
+    pushup: pushups,
+    situp: situps,
+    run: runs,
+    age: 22,
+    gender: 0,
+  );
+  return calculate.toNextPoint(repsOrTiming, type);
+}
 
 // adds a leading zero for single digit numbers
 String leadZero(int time) {
