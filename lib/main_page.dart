@@ -5,6 +5,7 @@ import 'package:ns_tracker/setting_button.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
+import 'package:flip_card/flip_card.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -28,42 +29,81 @@ class _MainPageState extends State<MainPage> {
             child: ReusableCard(
               onPress: () {},
               clickColor: kInactiveCardColor,
-              cardChild: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'DAYS TO ORD',
-                    style: kLabelTextStyle,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: <Widget>[
-                      Text(
-                        '365',
-                        style: kNumberTextStyle,
-                      ),
-                      Text(
-                        'LEFT',
-                        style: kLabelTextStyle,
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(15.0),
-                    child: new LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width - 50,
-                      animation: true,
-                      lineHeight: 20.0,
-                      animationDuration: 2000,
-                      percent: 0.9,
-                      center: Text("90.0%"),
-                      linearStrokeCap: LinearStrokeCap.roundAll,
-                      progressColor: Colors.greenAccent,
+              cardChild: FlipCard(
+                front: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'DAYS TO ORD',
+                      style: kLabelTextStyle,
                     ),
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Text(
+                          '365',
+                          style: kNumberTextStyle,
+                        ),
+                        Text(
+                          'LEFT',
+                          style: kLabelTextStyle,
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: new LinearPercentIndicator(
+                        width: MediaQuery.of(context).size.width - 50,
+                        animation: true,
+                        lineHeight: 20.0,
+                        animationDuration: 2000,
+                        percent: 0.5,
+                        center: Text("50.0%"),
+                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        progressColor: Colors.greenAccent,
+                      ),
+                    ),
+                  ],
+                ),
+                back: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'DAYS TO POP',
+                      style: kLabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Text(
+                          '83',
+                          style: kNumberTextStyle,
+                        ),
+                        Text(
+                          'LEFT',
+                          style: kLabelTextStyle,
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: new LinearPercentIndicator(
+                        width: MediaQuery.of(context).size.width - 50,
+                        animation: true,
+                        lineHeight: 20.0,
+                        animationDuration: 2000,
+                        percent: 0.7,
+                        center: Text("70.0%"),
+                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        progressColor: Colors.greenAccent,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
