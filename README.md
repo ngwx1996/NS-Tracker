@@ -1,6 +1,6 @@
 # NS Tracker
 
-NS Tracker is an app made using Flutter.
+NS Tracker is an app made using Flutter.\
 National Service in Singapore is a system of compulsory goverment service over a two year period, either in the army, police, or civil defense.
 This app aims to supplements those in service with the tools listed below.
 
