@@ -177,21 +177,21 @@ class __IPPTStateState extends State<_IPPTState> {
 //              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'PUSH UP SCORE: ' +
-                      calculateStatic(pushups, situps, run, pushups, 'push-up'),
-                  style: kLabelTextStyle,
-                ),
-                Text(
-                  'SIT UP SCORE: ' +
-                      calculateStatic(pushups, situps, run, situps, 'sit-up'),
-                  style: kLabelTextStyle,
-                ),
-                Text(
-                  '2.4 KM RUN SCORE: ' +
-                      calculateStatic(pushups, situps, run, run, 'run'),
-                  style: kLabelTextStyle,
-                ),
+//                Text(
+//                  'PUSH UP SCORE: ' +
+//                      calculateStatic(pushups, situps, run, pushups, 'push-up'),
+//                  style: kLabelTextStyle,
+//                ),
+//                Text(
+//                  'SIT UP SCORE: ' +
+//                      calculateStatic(pushups, situps, run, situps, 'sit-up'),
+//                  style: kLabelTextStyle,
+//                ),
+//                Text(
+//                  '2.4 KM RUN SCORE: ' +
+//                      calculateStatic(pushups, situps, run, run, 'run'),
+//                  style: kLabelTextStyle,
+//                ),
                 Text(
                   'TOTAL SCORE: ' +
                       calculateScore(pushups, situps, run).toString(),

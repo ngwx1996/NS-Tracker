@@ -250,7 +250,9 @@ class _MainPageState extends State<MainPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.pushNamed(context, '/todo');
+                    },
                     clickColor: kInactiveCardColor,
                     cardChild: IconContent(
                       icon: MaterialCommunityIcons.format_list_bulleted,
