@@ -14,11 +14,11 @@ This app aims to supplements those in service with the tools listed below.
 7. To-Do List
 
 ## Future Improvements
-// TO BE COMPLETED
-
-## Getting Started
-//TO BE COMPLETED
+1. Implementing To-Do List
+2. Adding Singapore public holidays into app through API
+3. Adding gender and vocation choices for IPPT calculation
 
 ## Created and Maintained by
 Wei Xuan (Nathan) Ng\
 Sean Gerard Ang Wong
+Jan 9, 2020
