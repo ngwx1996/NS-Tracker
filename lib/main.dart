@@ -5,6 +5,7 @@ import 'main_page.dart';
 import 'ippt_calculator.dart';
 import 'package:ns_tracker/calendar_page.dart';
 import 'package:flutter/services.dart';
+import 'package:ns_tracker/settings.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/ippt': (context) => IPPT(),
         '/calendar': (context) => Calendar(),
         '/rankcmd': (context) => RanksCommands(),
+        '/settings': (context) => Settings(),
       },
     );
   }

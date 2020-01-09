@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:ns_tracker/constants.dart';
-import 'package:ns_tracker/setting_button.dart';
+import 'package:ns_tracker/save_read_data.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:intl/intl.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -13,8 +14,31 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  DateTime currentDate = DateTime.now();
+  int payday;
+  int daysToORD;
+  int daysToPOP;
+  double percentToORD;
+  double percentToPOP;
+  int daysToPayday;
+
+  @override
+  void initState() {
+    getPreference().then(loadSettings);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (payday == null) {
+      return Center(
+        child: Icon(
+          Icons.check_circle_outline,
+          color: Colors.green,
+          size: 60,
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,11 +46,12 @@ class _MainPageState extends State<MainPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.settings,
+              MaterialCommunityIcons.settings,
               color: Colors.white,
             ),
             onPressed: () {
               // do something
+              Navigator.pushNamed(context, '/settings');
             },
           )
         ],
@@ -54,7 +79,7 @@ class _MainPageState extends State<MainPage> {
                       textBaseline: TextBaseline.alphabetic,
                       children: <Widget>[
                         Text(
-                          '365',
+                          daysToORD.toString(),
                           style: kNumberTextStyle,
                         ),
                         Text(
@@ -70,8 +95,8 @@ class _MainPageState extends State<MainPage> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,
-                        percent: 0.5,
-                        center: Text("50.0%"),
+                        percent: percentToORD,
+                        center: Text(percentToORD.toStringAsPrecision(4)),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.greenAccent,
                       ),
@@ -91,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                       textBaseline: TextBaseline.alphabetic,
                       children: <Widget>[
                         Text(
-                          '83',
+                          daysToPOP.toString(),
                           style: kNumberTextStyle,
                         ),
                         Text(
@@ -107,8 +132,8 @@ class _MainPageState extends State<MainPage> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,
-                        percent: 0.7,
-                        center: Text("70.0%"),
+                        percent: percentToPOP,
+                        center: Text(percentToPOP.toStringAsPrecision(4)),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.greenAccent,
                       ),
@@ -130,7 +155,7 @@ class _MainPageState extends State<MainPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          '29',
+                          daysToPayday.toString(),
                           style: kNumberTextStyle,
                         ),
                         Text(
@@ -261,22 +286,38 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          // Settings Button
-//          Container(
-//            child: Row(
-//              children: <Widget>[
-//                Expanded(
-//                  child: Container(),
-//                ),
-//                Container(
-//                  child: SettingButton(),
-//                  width: 100,
-//                ),
-//              ],
-//            ),
-//          ),
+          // Gap
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );
+  }
+
+  void loadSettings(List retrieved) {
+    setState(() {
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+
+      this.payday = retrieved[1];
+      int serviceTerm = retrieved[3];
+      DateTime ordDate = dateFormat.parse(retrieved[4]);
+      DateTime popDate = dateFormat.parse(retrieved[5]);
+      this.daysToORD = ordDate.difference(currentDate).inDays + 1;
+      this.daysToPOP = popDate.difference(currentDate).inDays + 1;
+      DateTime enlistDate =
+          DateTime(ordDate.year, ordDate.month - serviceTerm, ordDate.day);
+      this.percentToORD =
+          1 - daysToORD / ordDate.difference(enlistDate).inDays ?? 0;
+      this.percentToPOP =
+          1 - daysToPOP / popDate.difference(enlistDate).inDays ?? 0;
+      DateTime nextPayday;
+      if (currentDate.day < payday) {
+        nextPayday = DateTime(currentDate.year, currentDate.month, payday);
+      } else {
+        nextPayday = DateTime(currentDate.year, currentDate.month + 1, payday);
+      }
+      this.daysToPayday = nextPayday.difference(currentDate).inDays + 1 ?? 0;
+    });
   }
 }

@@ -3,12 +3,10 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
+import 'save_read_data.dart';
+import 'package:intl/intl.dart';
 
 //TODO add public holidays
-
-var _startDate = DateTime(2019, 12, 1);
-var _ordDate = DateTime(2020, 1, 14);
-var _currentDate;
 
 class Calendar extends StatefulWidget {
   @override
@@ -16,8 +14,28 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  int selectedShift;
+  DateTime shiftStartDate;
+  DateTime ordDate;
+  DateTime popDate;
+
+  @override
+  void initState() {
+    getPreference().then(loadSettings);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (selectedShift == null) {
+      return Center(
+        child: Icon(
+          Icons.check_circle_outline,
+          color: Colors.green,
+          size: 60,
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Calendar'),
@@ -25,9 +43,7 @@ class _CalendarState extends State<Calendar> {
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.0),
         child: CalendarCarousel<EventInterface>(
-          onDayPressed: (DateTime date, List<EventInterface> events) {
-            this.setState(() => _currentDate = date);
-          },
+          onDayPressed: (DateTime date, List<EventInterface> events) {},
           weekendTextStyle: TextStyle(
             color: Colors.red,
           ),
@@ -39,7 +55,6 @@ class _CalendarState extends State<Calendar> {
           todayButtonColor: Colors.cyan,
           todayBorderColor: Colors.cyan,
           customDayBuilder: (
-            /// you can provide your own build function to make custom day containers
             bool isSelectable,
             int index,
             bool isSelectedDay,
@@ -50,19 +65,28 @@ class _CalendarState extends State<Calendar> {
             bool isThisMonthDay,
             DateTime day,
           ) {
-            /// If you return null, [CalendarCarousel] will build container for current [day] with default function.
-            /// This way you can build custom containers for specific days only, leaving rest as default.
-            ///
             // Shift Dates Icon
-            if ((day.difference(_startDate).inDays % 3) == 0 &&
-                (day.difference(_ordDate).inDays < 0) &&
-                (day.difference(_startDate).inDays >= 0)) {
+            if (day == ordDate) {
+              return Center(
+                child: Icon(MaterialCommunityIcons.cake_variant),
+              );
+            } else if (day == popDate) {
+              return Center(
+                child: Icon(MaterialCommunityIcons.medal),
+              );
+            } else if ((selectedShift > 2) &&
+                (day.difference(shiftStartDate).inDays % selectedShift) == 0 &&
+                (day.difference(ordDate).inDays < 0) &&
+                (day.difference(shiftStartDate).inDays >= 0)) {
               return Center(
                 child: Icon(MaterialIcons.work),
               );
-            } else if (day == _ordDate) {
+            } else if (selectedShift == 4 &&
+                (day.difference(shiftStartDate).inDays % selectedShift) == 1 &&
+                (day.difference(ordDate).inDays < 0) &&
+                (day.difference(shiftStartDate).inDays >= 0)) {
               return Center(
-                child: Icon(MaterialCommunityIcons.cake_variant),
+                child: Icon(MaterialIcons.work),
               );
             } else {
               return null;
@@ -70,13 +94,25 @@ class _CalendarState extends State<Calendar> {
           },
           weekFormat: false,
           markedDatesMap: null,
-          height: 420.0,
-          selectedDateTime: _currentDate,
+          height: 1000.0,
+          selectedDateTime: null,
           daysHaveCircularBorder: null,
-
-          /// null for not rendering any border, true for circular border, false for rectangular border
+          maxSelectedDate: DateTime(ordDate.year, 12, 31),
         ),
       ),
     );
+  }
+
+  void loadSettings(List retrieved) {
+    setState(() {
+      DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+      this.selectedShift = retrieved[2];
+      String formatordDate = retrieved[4];
+      this.ordDate = dateFormat.parse(formatordDate);
+      String formatpopDate = retrieved[5];
+      this.popDate = dateFormat.parse(formatpopDate);
+      String formatShiftStartDate = retrieved[6];
+      this.shiftStartDate = dateFormat.parse(formatShiftStartDate);
+    });
   }
 }

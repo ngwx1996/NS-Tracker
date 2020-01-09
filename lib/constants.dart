@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kBottomContainerHeight = 80.0;
-const kActiveCardColor = Color(0xFF1D1E33);
-const kInactiveCardColor = Color(0xFF1D1E33);
+const kInactiveCardColor = Color(0xFF1E1E1E);
 //const kInactiveCardColor = Colors.white;
 const kBottomCardColor = Color(0xFFEB1555);
 
@@ -13,7 +12,7 @@ const kLargeButtonTextStyle = TextStyle(
 
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,
-  color: Colors.white70,
+  color: Colors.white54,
   //color: Color(0xFF8D8E98),
 );
 
@@ -21,6 +20,19 @@ const kNumberTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
   color: Colors.white,
+);
+
+const kNumberSettingTextStyle = TextStyle(
+  fontSize: 22.0,
+  fontWeight: FontWeight.normal,
+  color: Colors.white,
+);
+
+const kLabelSettingTextStyle = TextStyle(
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+  //color: Color(0xFF8D8E98),
 );
 
 const rankNamesSAF = [
