@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ns_tracker/constants.dart';
+import 'package:ns_tracker/reusable_card.dart';
 import 'rank_display.dart';
 
 class RanksCommands extends StatefulWidget {
@@ -117,6 +119,34 @@ class PageThree extends StatelessWidget {
 class PageFour extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView.builder(
+      itemExtent: 100,
+      itemCount: 25,
+      itemBuilder: (context, index) => Container(
+        child: ReusableCard(
+          onPress: () {},
+          clickColor: Color(0xFF1E1E1E),
+          cardChild: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                malayCommands[index],
+                style: index == 0 || index == 14
+                    ? kCommandTitleTextStyle
+                    : kLabelTextStyle,
+              ),
+              Visibility(
+                child: Text(
+                  englishCommand[index],
+                  style: kCommandTextStyle,
+                ),
+                visible: index == 0 || index == 14 ? false : true,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
