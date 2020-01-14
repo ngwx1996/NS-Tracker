@@ -79,11 +79,11 @@ class _MainPageState extends State<MainPage> {
                       textBaseline: TextBaseline.alphabetic,
                       children: <Widget>[
                         Text(
-                          daysToORD.toString(),
+                          daysToORD <= 0 ? "ORD LO" : daysToORD.toString(),
                           style: kNumberTextStyle,
                         ),
                         Text(
-                          'LEFT',
+                          daysToORD == 0 ? '' : 'LEFT',
                           style: kLabelTextStyle,
                         )
                       ],
@@ -95,7 +95,7 @@ class _MainPageState extends State<MainPage> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,
-                        percent: percentToORD,
+                        percent: percentToORD > 1 ? 1 : percentToORD,
                         center: Text(percentToORD.toStringAsPrecision(4)),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.greenAccent,
@@ -116,11 +116,11 @@ class _MainPageState extends State<MainPage> {
                       textBaseline: TextBaseline.alphabetic,
                       children: <Widget>[
                         Text(
-                          daysToPOP.toString(),
+                          daysToPOP <= 0 ? "POP LO" : daysToPOP.toString(),
                           style: kNumberTextStyle,
                         ),
                         Text(
-                          'LEFT',
+                          daysToPOP == 0 ? '' : 'LEFT',
                           style: kLabelTextStyle,
                         )
                       ],
@@ -132,7 +132,7 @@ class _MainPageState extends State<MainPage> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,
-                        percent: percentToPOP,
+                        percent: percentToPOP > 1 ? 1 : percentToPOP,
                         center: Text(percentToPOP.toStringAsPrecision(4)),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.greenAccent,
@@ -155,7 +155,9 @@ class _MainPageState extends State<MainPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          daysToPayday.toString(),
+                          currentDate.day == payday
+                              ? 0.toString()
+                              : daysToPayday.toString(),
                           style: kNumberTextStyle,
                         ),
                         Text(
@@ -305,8 +307,14 @@ class _MainPageState extends State<MainPage> {
       int serviceTerm = retrieved[3];
       DateTime ordDate = dateFormat.parse(retrieved[4]);
       DateTime popDate = dateFormat.parse(retrieved[5]);
-      this.daysToORD = ordDate.difference(currentDate).inDays + 1;
-      this.daysToPOP = popDate.difference(currentDate).inDays + 1;
+      this.daysToORD = ordDate
+          .difference(
+              DateTime(currentDate.year, currentDate.month, currentDate.day))
+          .inDays;
+      this.daysToPOP = popDate
+          .difference(
+              DateTime(currentDate.year, currentDate.month, currentDate.day))
+          .inDays;
       DateTime enlistDate =
           DateTime(ordDate.year, ordDate.month - serviceTerm, ordDate.day);
       this.percentToORD =
@@ -319,7 +327,11 @@ class _MainPageState extends State<MainPage> {
       } else {
         nextPayday = DateTime(currentDate.year, currentDate.month + 1, payday);
       }
-      this.daysToPayday = nextPayday.difference(currentDate).inDays + 1 ?? 0;
+      this.daysToPayday = nextPayday
+              .difference(DateTime(
+                  currentDate.year, currentDate.month, currentDate.day))
+              .inDays ??
+          0;
     });
   }
 }

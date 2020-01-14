@@ -17,7 +17,7 @@ class SettingsBox extends StatelessWidget {
             flex: 1,
             child: Container(
               alignment: Alignment.center,
-              width: 85,
+              width: 100,
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(

@@ -82,7 +82,7 @@ class _SettingsState extends State<Settings> {
           ),
           Flexible(
             child: SettingsBox(
-              cardText: 'Enlist Date',
+              cardText: 'Service Term',
               cardChild: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -232,14 +232,14 @@ class _SettingsState extends State<Settings> {
                   GestureDetector(
                       onTap: () {
                         setState(() {
-                          selectedShift = 4;
+                          selectedShift = 8;
                         });
                       },
                       child: Text(
                         '2 Day 2 Off',
                         style: TextStyle(
                           fontSize: 18.0,
-                          color: selectedShift == 4
+                          color: selectedShift == 8
                               ? Colors.tealAccent
                               : Colors.white,
                         ),
