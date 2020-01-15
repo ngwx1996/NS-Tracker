@@ -3,8 +3,7 @@ import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
-import 'package:ns_tracker/constants.dart';
-import 'save_read_data.dart';
+import 'package:ns_tracker/save_read_data.dart';
 import 'package:intl/intl.dart';
 
 //TODO add public holidays

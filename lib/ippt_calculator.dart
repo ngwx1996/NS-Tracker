@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ns_tracker/reusable_card.dart';
 import 'constants.dart';
 import 'ippt_brain1.dart';
+import 'save_read_data.dart';
 
 class IPPT extends StatelessWidget {
   @override
@@ -25,15 +26,40 @@ class __IPPTStateState extends State<_IPPTState> {
   int pushups = 30;
   int situps = 30;
   int run = 1100;
-  IPPTBrain calculate = IPPTBrain(
-    pushup: 30,
-    situp: 30,
-    run: 1100,
-    age: 23,
-    gender: 0,
-  );
+  int currentAge;
+  IPPTBrain calculate;
+//  IPPTBrain calculate = IPPTBrain(
+//    pushup: 30,
+//    situp: 30,
+//    run: 1100,
+//    age: 22,
+//    gender: 0,
+//  );
+
+  @override
+  void initState() {
+    getAge().then(loadSettings);
+    calculate = IPPTBrain(
+      pushup: 30,
+      situp: 30,
+      run: 1100,
+      age: currentAge,
+      gender: 0,
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (currentAge == null) {
+      return Center(
+        child: Icon(
+          Icons.check_circle_outline,
+          color: Colors.green,
+          size: 60,
+        ),
+      );
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -44,7 +70,8 @@ class __IPPTStateState extends State<_IPPTState> {
             cardChild: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(toNextPoint(pushups, situps, run, pushups, 'push-up')
+                Text(toNextPoint(pushups, situps, run, pushups, 'push-up',
+                            currentAge)
                         .toString() +
                     ' reps to next point'),
                 Text(
@@ -71,8 +98,8 @@ class __IPPTStateState extends State<_IPPTState> {
                       ),
                     ),
                     Text(
-                      calculateStatic(
-                              pushups, situps, run, pushups, 'push-up') +
+                      calculateStatic(pushups, situps, run, pushups, 'push-up',
+                              currentAge) +
                           "    ",
                       style: kLabelTextStyle,
                     ),
@@ -89,7 +116,8 @@ class __IPPTStateState extends State<_IPPTState> {
             cardChild: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(toNextPoint(pushups, situps, run, situps, 'sit-up')
+                Text(toNextPoint(
+                            pushups, situps, run, situps, 'sit-up', currentAge)
                         .toString() +
                     ' reps to next point'),
                 Text(
@@ -116,7 +144,8 @@ class __IPPTStateState extends State<_IPPTState> {
                       ),
                     ),
                     Text(
-                      calculateStatic(pushups, situps, run, situps, 'sit-up') +
+                      calculateStatic(pushups, situps, run, situps, 'sit-up',
+                              currentAge) +
                           "    ",
                       style: kLabelTextStyle,
                     ),
@@ -159,7 +188,8 @@ class __IPPTStateState extends State<_IPPTState> {
                       ),
                     ),
                     Text(
-                      calculateStatic(pushups, situps, run, run, 'run') +
+                      calculateStatic(
+                              pushups, situps, run, run, 'run', currentAge) +
                           "    ",
                       style: kLabelTextStyle,
                     ),
@@ -194,12 +224,14 @@ class __IPPTStateState extends State<_IPPTState> {
 //                ),
                 Text(
                   'TOTAL SCORE: ' +
-                      calculateScore(pushups, situps, run).toString(),
+                      calculateScore(pushups, situps, run, currentAge)
+                          .toString(),
                   style: kLabelTextStyle,
                 ),
                 Text(
                   'AWARD: ' +
-                      calculate.getAward(calculateScore(pushups, situps, run)),
+                      calculate.getAward(
+                          calculateScore(pushups, situps, run, currentAge)),
                   style: kLabelTextStyle,
                 ),
               ],
@@ -209,36 +241,44 @@ class __IPPTStateState extends State<_IPPTState> {
       ],
     );
   }
+
+  void loadSettings(int retrievedAge) {
+    setState(() {
+      this.currentAge = retrievedAge;
+    });
+  }
 }
 
-int calculateScore(int pushups, int situps, int runs) {
+int calculateScore(int pushups, int situps, int runs, int currentAge) {
   IPPTBrain calculate = IPPTBrain(
     pushup: pushups,
     situp: situps,
     run: runs,
-    age: 22,
+    age: currentAge,
     gender: 0,
   );
   return calculate.getOverallScore();
 }
 
-String calculateStatic(int pushups, int situps, int runs, repsOrTiming, type) {
+String calculateStatic(
+    int pushups, int situps, int runs, repsOrTiming, type, int currentAge) {
   IPPTBrain calculate = IPPTBrain(
     pushup: pushups,
     situp: situps,
     run: runs,
-    age: 22,
+    age: currentAge,
     gender: 0,
   );
   return calculate.getScore(repsOrTiming, type);
 }
 
-int toNextPoint(int pushups, int situps, int runs, repsOrTiming, type) {
+int toNextPoint(
+    int pushups, int situps, int runs, repsOrTiming, type, int currentAge) {
   IPPTBrain calculate = IPPTBrain(
     pushup: pushups,
     situp: situps,
     run: runs,
-    age: 22,
+    age: currentAge,
     gender: 0,
   );
   return calculate.toNextPoint(repsOrTiming, type);

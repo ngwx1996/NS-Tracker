@@ -21,10 +21,13 @@ class _MainPageState extends State<MainPage> {
   double percentToORD;
   double percentToPOP;
   int daysToPayday;
+  int leave;
+  int off;
 
   @override
   void initState() {
     getPreference().then(loadSettings);
+    getLeaveOff().then(loadLeaveOff);
     super.initState();
   }
 
@@ -95,7 +98,7 @@ class _MainPageState extends State<MainPage> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,
-                        percent: percentToORD > 1 ? 1 : percentToORD,
+                        percent: percentToORD,
                         center: Text(percentToORD.toStringAsPrecision(4)),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.greenAccent,
@@ -132,7 +135,7 @@ class _MainPageState extends State<MainPage> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2000,
-                        percent: percentToPOP > 1 ? 1 : percentToPOP,
+                        percent: percentToPOP,
                         center: Text(percentToPOP.toStringAsPrecision(4)),
                         linearStrokeCap: LinearStrokeCap.roundAll,
                         progressColor: Colors.greenAccent,
@@ -194,22 +197,51 @@ class _MainPageState extends State<MainPage> {
                     cardChild: Row(
                       children: <Widget>[
                         Expanded(
-                          child: ReusableCard(
-                            onPress: () {},
-                            clickColor: kInactiveCardColor,
-                            cardChild: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  '14',
-                                  style: kNumberTextStyle,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                leave.toString(),
+                                style: kNumberTextStyle,
+                              ),
+                              Text(
+                                'LEAVE',
+                                style: kLabelTextStyle,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          leave--;
+                                          saveLeave(leave);
+                                        });
+                                      },
+                                      child: Icon(
+                                        Feather.minus,
+                                        size: 25,
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          leave++;
+                                          saveLeave(leave);
+                                        });
+                                      },
+                                      child: Icon(
+                                        Feather.plus,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'LEAVE',
-                                  style: kLabelTextStyle,
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(
@@ -222,22 +254,51 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                         Expanded(
-                          child: ReusableCard(
-                            onPress: () {},
-                            clickColor: kInactiveCardColor,
-                            cardChild: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  '10',
-                                  style: kNumberTextStyle,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                off.toString(),
+                                style: kNumberTextStyle,
+                              ),
+                              Text(
+                                'OFF',
+                                style: kLabelTextStyle,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          off--;
+                                          saveLeave(off);
+                                        });
+                                      },
+                                      child: Icon(
+                                        Feather.minus,
+                                        size: 25,
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          off++;
+                                          saveLeave(off);
+                                        });
+                                      },
+                                      child: Icon(
+                                        Feather.plus,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  'OFF',
-                                  style: kLabelTextStyle,
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -319,8 +380,14 @@ class _MainPageState extends State<MainPage> {
           DateTime(ordDate.year, ordDate.month - serviceTerm, ordDate.day);
       this.percentToORD =
           1 - daysToORD / ordDate.difference(enlistDate).inDays ?? 0;
+      if (this.percentToORD > 1) {
+        percentToORD = 1;
+      }
       this.percentToPOP =
           1 - daysToPOP / popDate.difference(enlistDate).inDays ?? 0;
+      if (this.percentToPOP > 1) {
+        percentToPOP = 1;
+      }
       DateTime nextPayday;
       if (currentDate.day < payday) {
         nextPayday = DateTime(currentDate.year, currentDate.month, payday);
@@ -332,6 +399,13 @@ class _MainPageState extends State<MainPage> {
                   currentDate.year, currentDate.month, currentDate.day))
               .inDays ??
           0;
+    });
+  }
+
+  void loadLeaveOff(List retrieved) {
+    setState(() {
+      this.leave = retrieved[0];
+      this.off = retrieved[1];
     });
   }
 }

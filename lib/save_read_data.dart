@@ -38,3 +38,28 @@ Future<List> getPreference() async {
     shiftStartDate
   ];
 }
+
+Future<int> getAge() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  int age = prefs.getInt('age') ?? 21;
+  return age;
+}
+
+Future<void> saveLeave(int leave) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setInt('leave', leave);
+  return;
+}
+
+Future<void> saveOff(int off) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setInt('off', off);
+  return;
+}
+
+Future<List> getLeaveOff() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  int leave = prefs.getInt('leave') ?? 14;
+  int off = prefs.getInt('leave') ?? 10;
+  return [leave, off];
+}
