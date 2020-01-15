@@ -6,7 +6,7 @@ import 'ippt_calculator.dart';
 import 'package:ns_tracker/calendar_page.dart';
 import 'package:flutter/services.dart';
 import 'package:ns_tracker/settings.dart';
-import 'todo.dart';
+import 'todos.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/calendar': (context) => Calendar(),
         '/rankcmd': (context) => RanksCommands(),
         '/settings': (context) => Settings(),
-        '/todo': (context) => Todo(),
+        '/todo': (context) => TodosApp(),
       },
     );
   }
