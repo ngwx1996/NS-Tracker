@@ -29,7 +29,7 @@ class __IPPTStateState extends State<_IPPTState> {
     pushup: 30,
     situp: 30,
     run: 1100,
-    age: 22,
+    age: 23,
     gender: 0,
   );
   @override
